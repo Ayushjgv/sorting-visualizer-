@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #2a2a72, #009ffd);
+  font-family: "Poppins", sans-serif;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.visualizer-container {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 16px;
+  background-color: #ff6b6b;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #ff4d4d;
+  transform: scale(1.05);
+}
+
+button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 60vh;
+  width: 90%;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.2s ease, background-color 0.2s ease;
+}
+
+.slider {
+  margin-top: 20px;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin-left: 10px;
+  accent-color: #ff6b6b;
+}
