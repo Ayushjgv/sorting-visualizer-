@@ -1,3 +1,103 @@
+
+import React, { useEffect, useState } from 'react';
+import {
+  Bubble, Quick,
+  Insertion, Selection,Heap,
+  Count, Shell,
+  Radix, Bogo,
+  Merge
+} from './components/sortingmethods.jsx';
+
+const App = () => {
+  const [Arr, setArr] = useState([]);
+  const [col, setcol] = useState('red');
+  const [value, setvalue] = useState(20);
+  const [speed, setspeed] = useState(10);
+  const [speedtext, setspeedtext] = useState('select');
+  const [sorting, setsorting] = useState('Bubble');
+  const [issorting, setissorting] = useState(false);
+
+  useEffect(() => {
+    generateArray();
+  }, [value]);
+
+  function generateArray() {
+    const arr = [];
+    for (let i = 0; i < value; i++) {
+      arr.push(Math.floor(Math.random() * 100) + 1);
+    }
+    setArr(arr);
+  }
+
+  async function handlesorting() {
+    switch (sorting) {
+      case 'Bubble': Bubble(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Merge':  Merge(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Quick': Quick(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Heap': await Heap(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Insertion': Insertion(Arr, setArr, speed, setissorting); break;
+      case 'Selection': Selection(Arr, setArr, speed, setissorting); break;
+      case 'Count':  Count(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Shell':  Shell(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Radix':  Radix(Arr, setArr, setcol, speed, setissorting); break;
+      case 'Bogo':  Bogo(Arr, setArr, setcol, speed, setissorting); break;
+      default: break;
+    }
+  }
+
+  return (
+    <div className='bodyy'>
+      <div className="container">
+        {Arr.map((value, index) => (
+          <div key={index} className="bar"
+            style={{ height: `${value * 5}px`, backgroundColor: `hsl(${value * 3}, 500%, 70%)` }}>
+          </div>
+        ))}
+      </div>
+
+      <div className="buttons">
+        <button className='btn' onClick={handlesorting} disabled={issorting}>Sort</button>
+        <button className='btn' onClick={generateArray} disabled={issorting}>Generate Array</button>
+
+        <select id='speed' value={sorting} disabled={issorting}
+          onChange={e => setsorting(e.target.value)}>
+          <option value="Bubble">Bubble Sort</option>
+          <option value="Merge">Merge Sort</option>
+          <option value="Quick">Quick Sort</option>
+          <option value="Heap">Heap Sort</option>
+          <option value="Insertion">Insertion Sort</option>
+          <option value="Selection">Selection Sort</option>
+          <option value="Count">Count Sort</option>
+          <option value="Shell">Shell Sort</option>
+          <option value="Radix">Radix Sort</option>
+          <option value="Bogo">Bogo Sort</option>
+        </select>
+
+        <input type="range" min={5} max={400} value={value}
+          onChange={e => setvalue(e.target.value)} />
+        <p>Bars: {value}</p>
+
+        <select id='speed' value={speedtext} disabled={issorting}
+          onChange={e => {
+            if (e.target.value === 'slow') { setspeed(100); setspeedtext('slow'); }
+            else if (e.target.value === 'medium') { setspeed(25); setspeedtext('medium'); }
+            else if (e.target.value === 'fast') { setspeed(1); setspeedtext('fast'); }
+          }}>
+          <option value="">Speed</option>
+          <option value="slow">Slow</option>
+          <option value="medium">Medium</option>
+          <option value="fast">Fast</option>
+        </select>
+        <p>Speed: {speed} ms</p>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+
+
+
 // import React, { useEffect, useState } from 'react'
 // // import{Bubble, Merge, Quick, Heap,
 // //        Insertion, Selection,
@@ -583,104 +683,4 @@
 // // }
 // // export default App;
 
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import {
-  Bubble, Quick,
-  Insertion, Selection,Heap,
-  Count, Shell,
-  Radix, Bogo,
-  Merge
-} from './components/sortingmethods.jsx';
-
-const App = () => {
-  const [Arr, setArr] = useState([]);
-  const [col, setcol] = useState('red');
-  const [value, setvalue] = useState(20);
-  const [speed, setspeed] = useState(10);
-  const [speedtext, setspeedtext] = useState('select');
-  const [sorting, setsorting] = useState('Bubble');
-  const [issorting, setissorting] = useState(false);
-
-  useEffect(() => {
-    generateArray();
-  }, [value]);
-
-  function generateArray() {
-    const arr = [];
-    for (let i = 0; i < value; i++) {
-      arr.push(Math.floor(Math.random() * 100) + 1);
-    }
-    setArr(arr);
-  }
-
-  async function handlesorting() {
-    switch (sorting) {
-      case 'Bubble': Bubble(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Merge':  Merge(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Quick': Quick(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Heap': await Heap(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Insertion': Insertion(Arr, setArr, speed, setissorting); break;
-      case 'Selection': Selection(Arr, setArr, speed, setissorting); break;
-      case 'Count':  Count(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Shell':  Shell(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Radix':  Radix(Arr, setArr, setcol, speed, setissorting); break;
-      case 'Bogo':  Bogo(Arr, setArr, setcol, speed, setissorting); break;
-      default: break;
-    }
-  }
-
-  return (
-    <div className='bodyy'>
-      <div className="container">
-        {Arr.map((value, index) => (
-          <div key={index} className="bar"
-            style={{ height: `${value * 5}px`, backgroundColor: `hsl(${value * 3}, 500%, 70%)` }}>
-          </div>
-        ))}
-      </div>
-
-      <div className="buttons">
-        <button className='btn' onClick={handlesorting} disabled={issorting}>Sort</button>
-        <button className='btn' onClick={generateArray} disabled={issorting}>Generate Array</button>
-
-        <select id='speed' value={sorting} disabled={issorting}
-          onChange={e => setsorting(e.target.value)}>
-          <option value="Bubble">Bubble Sort</option>
-          <option value="Merge">Merge Sort</option>
-          <option value="Quick">Quick Sort</option>
-          <option value="Heap">Heap Sort</option>
-          <option value="Insertion">Insertion Sort</option>
-          <option value="Selection">Selection Sort</option>
-          <option value="Count">Count Sort</option>
-          <option value="Shell">Shell Sort</option>
-          <option value="Radix">Radix Sort</option>
-          <option value="Bogo">Bogo Sort</option>
-        </select>
-
-        <input type="range" min={5} max={400} value={value}
-          onChange={e => setvalue(e.target.value)} />
-        <p>Bars: {value}</p>
-
-        <select id='speed' value={speedtext} disabled={issorting}
-          onChange={e => {
-            if (e.target.value === 'slow') { setspeed(100); setspeedtext('slow'); }
-            else if (e.target.value === 'medium') { setspeed(25); setspeedtext('medium'); }
-            else if (e.target.value === 'fast') { setspeed(1); setspeedtext('fast'); }
-          }}>
-          <option value="">Speed</option>
-          <option value="slow">Slow</option>
-          <option value="medium">Medium</option>
-          <option value="fast">Fast</option>
-        </select>
-        <p>Speed: {speed} ms</p>
-      </div>
-    </div>
-  );
-};
-
-export default App;
 
