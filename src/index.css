@@ -27,10 +27,12 @@ body{
 
 .container{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   width: fit-content;
+  align-items: flex-end;
+  /* overflow-x: auto; */
+  width: 100%;
   /* background: pink; */
-  
 }
 
 .bar{
@@ -41,8 +43,15 @@ body{
 }
 
 
+button:disabled{
+  background-color: #4f4040;
+  transform: scale(1.05);
+}
 
-
+select:disabled{
+  background-color: #4f4040;
+  transform: scale(1.05);
+}
 
 
 .buttons{
@@ -62,7 +71,7 @@ body{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.btn:hover{
+button:hover:not(:disabled){
   background: orange;
   cursor: pointer;
   scale: 1.1;
@@ -113,18 +122,21 @@ body{
   cursor: pointer;
   margin-left: 10px;
   background-color: rgb(0, 255, 145);
+  max-height: 50px;
+  overflow-y: auto;
 }
 
-#speed:hover{
+#speed:hover:not(:disabled){
   border-color: #4afb77;
   cursor: pointer;
   background-color: orange;
   transition: 0.2s ease;
 }
 
-select:hover {
+select:hover:not(:disabled){
   border-color: #4afb77;
 }
+
 
 
 .bar{
